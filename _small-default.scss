@@ -1,0 +1,63 @@
+/* Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.  */
+html {-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}
+
+/*  apply a natural box layout model to all elements  */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+
+body{
+    font-family: $defaultFont;
+    font-weight: $normalWeigh;
+    
+}
+
+
+header{
+    background-color: $primaryColor;
+    color: $secondaryColor;
+    padding: $inbetween;
+    
+    h1{
+        font-size: 2rem;
+        font-weight: $normalWeigh;
+    }
+}
+
+
+
+
+  h2{
+        font-size: 1.1rem;
+        font-weight: $normalWeigh;
+    }
+
+nav{
+     
+  display: flex;
+    
+ 
+  /* This aligns items to the end line on main-axis */
+  justify-content: center;
+   
+
+
+    background-color: $secondaryColor;
+    ul{
+        display: flex;
+        flex-basis: auto;
+        
+    }
+    
+   li{
+        
+        align-content: space-between; 
+         
+        text-decoration: none;
+        text-decoration: none;
+        
+        list-style: none;
+        }
+    
+   
+    
+}
