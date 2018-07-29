@@ -1,44 +1,50 @@
 <?php
-
 include 'dbconfig.php';
 
+$id=$_GET['id'];
+$result=mysqli_query($dbconn,"SELECT * FROM users WHERE id='$id'");
+$row=mysqli_fetch_assoc($result);
+
 if(isset($_POST['submit'])){
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $city = $_POST['city'];
     
-    $name  =  test_input($_POST['name']);
-    $email =  test_input($_POST['email']);
-    $phone =  test_input($_POST['phone']);
-    $city  =  test_input($_POST['city']);
+//    $sql="UPDATE users SET name='$name',email='$email',phone='$phone',city='$city' WHERE id={$id}";
     
-    $sql="INSERT INTO users(name,email,phone,city)VALUES('$name','$email','$phone','$city')";
+     $sql="UPDATE users SET name='$name',email='$email', phone='$phone',city = '$city' WHERE id='$id'";
     
-    if(mysqli_query($dbconn, $sql)){
-        
-        $result="Record successfully added!";
-         
+ 
     
-    }else{
-        $result="oops something went wrong!!" . mysqli_error($dbconn);
-    }
-        
+    
+   if(mysqli_query($dbconn,$sql)){
+       
+       header("location:view.php");
+       
+   }
+    
+    
+    
+    
+    
 }
 
 
-function test_input($data){
-    
-    $data=trim($data);
-    $data=stripslashes($data);
-    $data=htmlspecialchars($data);
-    return $data;
-    
-  
-}
+
+
+
+
+
+
+
+
+
+
 
 
 ?>
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -63,37 +69,31 @@ function test_input($data){
      <div class="container">
         <div class="row p-2">
            <div class="col-lg-4 offset-lg-4 bg-light text-dark mt-4 p-3 rounded">
-               <h4 class="text-center text-info p-2">CREATE DATABASE RECORD</h4>
+               <h4 class="text-center text-info p-2">UPDATE DATABASE RECORD</h4>
                <form action="" method="POST">
                  <div class="form-group">
                     <label for="name" class="text-info">Name</label>
-                    <input type="text" name="name"  class="form-control" placeholder="name" reguired> 
+                    <input type="text" name="name"  class="form-control" value="<?= $row['name']; ?>" reguired> 
                  </div>
                  <div class="form-group">
                     <label for="email" class="text-info">Email Address</label>
-                    <input type="text" name="email"  class="form-control" placeholder="email" reguired> 
+                    <input type="text" name="email"  class="form-control" value="<?= $row['email']; ?>" reguired> 
                  </div>
                  <div class="form-group">
                     <label for="phone" class="text-info">Phone</label>
-                    <input type="tel" name="phone"  class="form-control" placeholder="phone" reguired> 
+                    <input type="tel" name="phone"  class="form-control" value="<?= $row['phone']; ?>" reguired> 
                  </div>
                  <div class="form-group">
                     <label for="city" class="text-info">City</label>
-                    <input type="text" name="city"  class="form-control" placeholder="city" reguired> 
+                    <input type="text" name="city"  class="form-control" value="<?= $row['city']; ?>" reguired> 
                  </div>
                  <div class="form-group">
-                    <input type="submit" name="submit" value="CREATE" class="btn btn-info btn-block"> 
+                    <input type="submit" name="submit" value="UPDATE" class="btn btn-info btn-block"> 
                  </div>
                  <div class="form-group text-center">
-                     <a href="view.php" class="text-dark lead  font-weight-bold">Display Records</a>
+                     <a href="index.php" class=" text-info text-dark lead  font-weight-bold">Create Records</a>
                  </div>
-                 <div class="form-group text-center">
-                     <p class="lead" ><?= $result ?></p>
-                 </div>
-                 
-                  
-                   
-                   
+            
                </form>
            </div>
             
